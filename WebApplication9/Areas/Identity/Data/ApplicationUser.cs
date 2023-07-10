@@ -10,7 +10,6 @@ namespace WebApplication9.Areas.Identity.Data;
 // Add profile data for application users by adding properties to the WebApplication9User class
 public class ApplicationUser : IdentityUser
 {
-    public String FirstName { get; set; }
-    public String LastName { get; set; }
+   
 }
 

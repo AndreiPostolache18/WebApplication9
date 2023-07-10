@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WebApplication9.Areas.Identity.Data;
+using WebApplication9.Models;
 
 namespace WebApplication9.Data;
 
@@ -24,13 +25,26 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
 
     }
+
+    public DbSet<User> Users { get; set; }
+
+    public DbSet<Desk> Desks { get; set; }
+
+    public DbSet<Booking> Bookings { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=App9DeskSharing;Trusted_Connection=True;TrustServerCertificate=true");
+
+
+    }
 }
 
 public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-        builder.Property(u => u.FirstName).HasMaxLength(255);
-        builder.Property(u => u.LastName).HasMaxLength(255);
+        builder.Property(u => u.UserName).HasMaxLength(255);
+        
     }
 }
